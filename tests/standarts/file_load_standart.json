@@ -1,0 +1,1 @@
+"- use: file-plugin \n\n- file:\n    path: ./examples/yaml/file/load.yaml\n    transform: toString\n    into: data\n\n- return: data                   \n"
