@@ -1,0 +1,7 @@
+- use: docx-plugin 
+
+- docx:
+    path: ./examples/yaml/docx/test.docx
+    into: data
+
+- return: data                   

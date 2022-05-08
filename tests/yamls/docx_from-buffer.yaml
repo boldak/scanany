@@ -1,0 +1,11 @@
+- use: 
+    - file-plugin
+    - docx-plugin 
+
+- file:
+    path: ./examples/yaml/docx/test.docx
+    transform: docx->js
+    into: data  
+
+- return: data                   
+
