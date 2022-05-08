@@ -22,8 +22,11 @@ async function testRunner() {
     
                 const standartJSON = fs.readFileSync(`tests/standarts/${standartFilename}`).toString()
                 const standartObj = JSON.parse(standartJSON)
-    
-                expect(result).toStrictEqual(standartObj)
+
+                // This is needed to perform proper "diff" output when test fails
+                const resultPlainObj = JSON.parse(JSON.stringify(result))
+                
+                expect(resultPlainObj).toStrictEqual(standartObj)
             })
         }
     })
