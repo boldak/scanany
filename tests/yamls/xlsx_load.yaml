@@ -1,0 +1,12 @@
+- use: xlsx-plugin 
+
+- xlsx:
+    path: ./examples/yaml/xlsx/test.xlsx
+    into: data
+
+- map:
+    $ref: data
+    transform: json.stringify
+    into: result    
+
+- return: result                   

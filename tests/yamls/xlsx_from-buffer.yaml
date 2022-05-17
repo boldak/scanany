@@ -1,0 +1,11 @@
+- use: 
+    - file-plugin
+    - xlsx-plugin 
+
+- file:
+    path: ./examples/yaml/xlsx/test.xlsx
+    transform: xlsx->js
+    into: result    
+
+- return: result                   
+
