@@ -1,0 +1,31 @@
+
+- map:
+    - $const: 
+        prop: a
+        value:
+          - 1
+          - 2
+          - 3
+      into: data
+    
+    - $ref: data
+      transform:
+        project: prop
+      into: projection.prop
+                
+    - $ref: data
+      transform:
+        apply:
+          - project: value[1]
+      into: projection.value
+    
+    - $ref: data
+      transform:
+        apply:
+          - project: 
+              - prop
+              - value[1]
+      into: projection.mix
+    
+
+- return: projection

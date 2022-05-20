@@ -1,0 +1,42 @@
+# command of data transform can be use in 
+# apply inscturction of transform
+
+# describe yaml data as const
+# transforms it to js ans back to yaml 
+# also use json.stringify transform of js object to json
+
+
+- use: transform-plugin 
+
+- map:
+    - $const: >
+        root:
+          array:
+            - a
+            - b
+            - c
+          string: abc  
+      
+      into: data  
+
+    - $ref: data
+      transform: 
+        apply:
+          - yaml->js
+      into: result.js
+
+    - $ref: result.js
+      transform: 
+        apply:
+          - json.stringify
+      into: result.json
+    
+    
+    - $ref: result.js
+      transform: 
+        apply:
+          - js->yaml
+      into: result.yaml
+
+          
+- return: result

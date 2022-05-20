@@ -1,0 +1,53 @@
+- use: js-plugin
+
+
+- map:
+    $const:
+      - source: International Organization for Standardization                                                                          
+      - source: Our World in Data                                                                                                       
+      - source: COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University                                                                                            
+      - source: COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University                                                                                            
+      - source: World Bank World Development Indicators, sourced from Food and Agriculture Organization and World Bank estimates                                                                                         
+      - source: World Bank World Development Indicators, sourced from International Diabetes Federation, Diabetes Atlas                                                                                                    
+      - source: European CDC for European countries / UK Government / HHS for the United States / COVID-19 Tracker for Canada                                                                                          
+      - source: United Nations Development Programme (UNDP)                                                                             
+      - source: National government reports                                                                                             
+      - source: National government reports                                                                                             
+      - source: National government reports                                                                                             
+      - source: National government reports                                                                                             
+    into: data
+
+
+- js: >
+          async (command, context) => {
+            let hist = _.groupBy(context.data,"source" )
+            
+            context.hist = _.orderBy(
+                _.keys(hist).map( key => ({
+                    source: key,
+                    count: hist[key].length 
+                })),
+                "count",
+                "desc"
+            )    
+            
+            return context
+          }    
+
+- each:
+    in:
+      $ref: hist
+    as: item
+    into: hist
+    apply:
+      - map:
+          $ref: item
+          transform:
+            js: >
+                          (command, context, value) => {
+                            value.percents = Math.round(100*value.count/context.data.length)+"%"
+                            return value
+                          } 
+      - return: item               
+
+- return: hist                  

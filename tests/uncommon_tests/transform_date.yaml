@@ -1,0 +1,46 @@
+
+- map:
+    - $const: 
+        prop: a
+        value:
+          - 1
+          - 2
+          - 3
+        createdAt: 2021-05-05  
+      into: data
+    
+    - $ref: data
+      transform:
+        project: prop
+      into: projection.prop
+                
+    - $ref: data
+      transform:
+        apply:
+          - project: value[1]
+      into: projection.value
+    
+    - $ref: data
+      transform:
+        apply:
+          - project: 
+              - prop
+              - value[1]
+      into: projection.mix
+    
+    - $ref: data.createdAt
+      transform: date
+      into: projection.createdAt
+
+    - $const: 2022-01-01
+      transform: date
+      into: projection.nyd  
+
+    - transform: date
+      into: projection.now
+
+    - transform:
+        date: 2020-09-16
+      into: projection.date1    
+
+- return: projection

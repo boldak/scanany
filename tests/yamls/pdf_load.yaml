@@ -1,0 +1,12 @@
+- use: pdf-plugin 
+
+- pdf:
+    path: ./examples/yaml/pdf/test.pdf
+    into: data
+
+- map:
+    $ref: data
+    transform: json.stringify
+    into: result    
+
+- return: result                   

@@ -1,0 +1,8 @@
+- use: file-plugin 
+
+- file:
+    path: ./examples/yaml/file/load.yaml
+    transform: toString
+    into: data
+
+- return: data                   

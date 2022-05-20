@@ -1,0 +1,42 @@
+
+# how to use transform-plugin
+
+# command of data trancform can be use in 
+# apply inscturction of transform
+
+# describe csv data as const
+# transforms it into js, xml and yaml 
+
+
+- use: transform-plugin 
+
+- map:
+    - $const: >
+        var;value
+
+        a;1
+
+        b;2
+
+      into: data  
+
+    - $ref: data
+      into: result.inputData
+
+    - $ref: data
+      transform: csv->js
+      into: result.js
+
+    - $ref: result.js
+      transform: js->csv
+      into: result.csv
+    
+    - $ref: result.js
+      transform: js->xml
+      into: result.xml
+    
+    - $ref: result.js
+      transform: js->yaml
+      into: result.yaml
+    
+- return: result
