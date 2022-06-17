@@ -18,7 +18,6 @@
   "dependencies": {
     "arraybuffer-to-buffer": "0.0.7",
     "axios": "^0.24.0",
-    "axois": "0.0.1-security",
     "cheerio": "^1.0.0-rc.10",
     "csvjson": "^5.1.0",
     "deep-extend": "^0.6.0",
