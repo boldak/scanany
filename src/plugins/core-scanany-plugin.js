@@ -1,11 +1,26 @@
+/**
+ * A modern JavaScript utility library delivering modularity, performance & extras.
+ * @module lodash
+ * @see {@link https://lodash.com/|Lodash}
+*/
 const { get, set, isString, isArray, extend } = require("lodash")
 const _ = require("lodash")
+
+/**
+ * Recursive object extending.
+ * @module deep-extend
+ * @see {@link https://www.npmjs.com/package/deep-extend|deep-extend - npm}
+*/
 const deepExtend = require("deep-extend")
 
 
 let scraperInstance
 
-
+/**
+ * @exports module - instance with {@link Scrapper}
+ * @property {function} register - add {@link Scrapper} to module
+ * @property {Object[]} rules - rules for {@link Scrapper} for this rule in format name:function
+*/
 module.exports = {
 	
 	register: scraper => {
@@ -14,7 +29,10 @@ module.exports = {
 
 	rules: [
 
-	
+		/**
+		 * logging rule
+		 * @memberof rules
+		*/
 		{
 			name:["log"],
 			_execute: async (command, context) => {
@@ -36,7 +54,10 @@ module.exports = {
 			}
 		},
 
-		
+		/**
+		 * mapping rule
+		 * @memberof rules
+		*/
 		{
 			name:[
 				"map",
@@ -65,6 +86,10 @@ module.exports = {
 			}
 		},
 
+		/**
+		 * Scrapper transforming rule
+		 * @memberof rules
+		*/
 		{
 			name:[
 				"transform",
@@ -100,6 +125,10 @@ module.exports = {
 			}	
 		},
 
+		/**
+		 * value returning rule
+		 * @memberof rules
+		*/
 		{
 			name: [
 				"return",
@@ -112,6 +141,10 @@ module.exports = {
 			}
 		},
 
+		/**
+		 * setting rules "as", "info"
+		 * @memberof rules
+		*/
 		{
 			name: [
 				"as",
@@ -125,6 +158,10 @@ module.exports = {
 			}
 		},
 
+		/**
+		 * executive rule "apply"
+		 * @memberof rules
+		*/
 		{
 			name:["apply"],
 			_execute: async (command, context, value) => {
@@ -140,6 +177,10 @@ module.exports = {
 				
 		},
 
+		/**
+		 * looping throuhg commands for execution
+		 * @memberof rules
+		*/
 		{
 			name: [
 				"each",
