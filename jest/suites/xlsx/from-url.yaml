@@ -1,0 +1,18 @@
+- use: 
+    - axios-plugin
+    - xlsx-plugin 
+
+- fetch:
+    request:
+      method: GET
+      headers: 
+        accept: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      responseType: arraybuffer  
+      url: http://localhost:9999/sample3.xlsx
+    transform:
+      apply:
+        - project: data
+        - xlsx->js   
+    into: result
+
+- return: result                   

@@ -1,0 +1,18 @@
+- use: 
+    - axios-plugin
+    - docx-plugin 
+
+- fetch:
+    request:
+      method: GET
+      headers: 
+        accept: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+      responseType: arraybuffer  
+      url: http://localhost:9999/test.docx
+    transform:
+      apply:
+        - project: data
+        - docx->js   
+    into: result
+
+- return: result                   

@@ -1,0 +1,11 @@
+- use: 
+    - file-plugin
+    - docx-plugin 
+
+- file:
+    path: ./jest/server/web/test.docx
+    transform: docx->js
+    into: data  
+
+- return: data                   
+

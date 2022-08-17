@@ -1,0 +1,45 @@
+- use:
+    - axios-plugin
+    - cheerio-plugin
+
+- fetch:
+    request:
+      method: GET
+      url: http://localhost:9999/hackernews.html
+    transform:
+      apply:
+        - project: data
+        - html->page
+    into: page
+
+- all:
+    $ref: page
+    select: a.titlelink
+    into: collection
+
+- each:
+    in:
+      $ref: collection
+    as: element
+    into: info
+    apply:
+      - map:
+          - $ref: element
+            transform: html
+            into: res.html
+
+          - $ref: element
+            transform: text
+            into: res.text
+
+          - $ref: element
+            transform: class
+            into: res.class
+
+          - $ref: element
+            transform: attributes
+            into: res.attributes
+
+      - return: res
+
+- return: info

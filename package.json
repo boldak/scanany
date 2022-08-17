@@ -4,7 +4,9 @@
   "description": "Scanany Plugable Data Scraper",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "server": "node ./jest/server/server.js",
+    "server-stop": "node ./jest/server/server.stop.js",
+    "test": "jest ./jest/tests --coverage && npm run server-stop",
     "example": "node example"
   },
   "author": "Andrey Boldak",
@@ -16,10 +18,11 @@
   "dependencies": {
     "arraybuffer-to-buffer": "0.0.7",
     "axios": "^0.24.0",
-    "axois": "0.0.1-security",
     "cheerio": "^1.0.0-rc.10",
     "csvjson": "^5.1.0",
     "deep-extend": "^0.6.0",
+    "express": "^4.18.1",
+    "jest": "^28.0.3",
     "js-yaml": "^4.1.0",
     "json2csv": "^5.0.6",
     "lodash": "^4.17.21",
@@ -32,6 +35,8 @@
     "pdf-parse": "^1.1.1",
     "puppeteer": "^13.0.1",
     "rss-parser": "^3.12.0",
+    "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1",
     "uuid": "^8.3.2",
     "xml2js": "^0.4.23"
   },

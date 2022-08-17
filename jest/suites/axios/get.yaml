@@ -1,0 +1,16 @@
+# how to use axios-plugin
+
+# HTTP request with axios
+
+- use: axios-plugin
+
+- axios:
+    apply:
+      - fetch:
+          request:
+            method: GET
+            url: http://localhost:9999/hackernews.html
+          transform:
+            project: data
+          into: data
+- return: data

@@ -1,0 +1,38 @@
+# how to use transform-plugin
+
+# command of data transform can be use in 
+# apply inscturction of transform
+
+# describe xml data as const
+# transforms it to js ans back to xml 
+# also use json.stringify transform of js object to json
+
+
+- use: transform-plugin 
+
+- map:
+    - $const: >
+        <node name="root">
+          <node name="child">
+            text content
+          </node>
+        </node>
+      into: data  
+
+    - $ref: data
+      transform: 
+        apply:
+          - xml->js
+          - json.stringify
+      into: result.json
+
+    - $ref: data
+      transform: 
+        apply:
+          - xml->js
+          - js->xml
+      into: result.xml
+      
+
+          
+- return: result

@@ -1,0 +1,37 @@
+# core-plugin used as default
+# Commands: map, each, return
+# Features: use context references , use constants 
+
+- map:
+    - $const: data
+      into: var
+    
+    - $const:
+        - a
+        - b
+        - c
+      into: 
+        $ref: var
+
+    - $const: toString
+      into: format      
+
+    - $ref: data
+      into: data1        
+
+- each:
+    in:
+      $ref: data
+    as: $item
+    indexed-by: $index      
+    into: result       
+    apply:
+      - map:
+          - $ref: $item
+            into: res.data
+          - $ref: $index
+            into: res.index
+
+      - return: res
+
+- return: result        

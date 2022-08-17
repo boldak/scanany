@@ -1,0 +1,10 @@
+- use: 
+    - file-plugin
+    - pdf-plugin 
+
+- file:
+    path: ./jest/server/web/test.pdf
+    transform: pdf->js
+    into: data  
+
+- return: data                   

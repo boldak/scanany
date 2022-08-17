@@ -1,10 +1,26 @@
+/**
+ * A modern JavaScript utility library delivering modularity, performance & extras.
+ * @module lodash
+ * @see {@link https://lodash.com/|Lodash}
+*/
 const { keys, isString, isArray, set, get, extend } = require("lodash")
+
+/**
+ * Fast, flexible & lean implementation of core jQuery designed specifically for the server.
+ * @module cheerio
+ * @see {@link https://cheerio.js.org/|Cheerio}
+*/
 const cheerio = require("cheerio")
 
 
 let scraperInstance
 
-
+/**
+ * cheerio module engine, runs command
+ * @function engineAxios
+ * @param {Object} command - command to execute
+ * @param {string} context - path to context
+*/
 const engineCheerio = async (command, context) => {
 	context.$cheerio = cheerio
 	
@@ -17,6 +33,13 @@ const engineCheerio = async (command, context) => {
 	return context
 }
 
+/**
+ * Gets info from DOM
+ * @function load
+ * @param {Object} command - command to execute
+ * @param {string} context - path to context
+ * @param {Object} value - object to load from
+*/
 const load = async (command, context, value) => {
 
 	let content = (value) ? value: scraperInstance.resolveValue(command, context) || ""
@@ -32,7 +55,12 @@ const load = async (command, context, value) => {
 	return context	
 }
 
-
+/**
+ * select specific info from DOM
+ * @function once
+ * @param {Object} command - command to execute
+ * @param {string} context - path to context
+*/
 const once = async (command, context) => {
 	
 	let dom = 	scraperInstance.resolveValue(command, context) 
@@ -57,6 +85,12 @@ const once = async (command, context) => {
 
 }
 
+/**
+ * select all the info from DOM
+ * @function all
+ * @param {Object} command - command to execute
+ * @param {string} context - path to context
+*/
 const all = async (command, context) => {
 	
 	let dom = 	scraperInstance.resolveValue(command, context) 
@@ -75,8 +109,22 @@ const all = async (command, context) => {
 	return context
 }
 
-
+/**
+ * select DOM node text
+ * @function nodeText
+ * @param {Object} command - command to execute
+ * @param {string} context - path to context
+ * @param {Object} value - node to load from
+*/
 const nodeText = (command, context, value) => value.text()
+
+/**
+ * select HTML node outer text
+ * @function nodeHtml
+ * @param {Object} command - command to execute
+ * @param {string} context - path to context
+ * @param {Object} value - node to load from
+*/
 const nodeHtml = (command, context, value) => {
 	const outerHTML  = element => {
 	    var index = element.index();
@@ -89,12 +137,26 @@ const nodeHtml = (command, context, value) => {
 	return outerHTML(value)
 }	
 
+/**
+ * select DOM node classes
+ * @function nodeClasses
+ * @param {Object} command - command to execute
+ * @param {string} context - path to context
+ * @param {Object} value - node to load from
+*/
 const nodeClasses = async (command, context, value) => {
 	value = await value.attr("class")
 	value = value.split(" ").filter(c => c)
 	return value
 }	
 
+/**
+ * select DOM node attributes
+ * @function nodeAttributes
+ * @param {Object} command - command to execute
+ * @param {string} context - path to context
+ * @param {Object} value - node to load from
+*/
 const nodeAttributes = async (command, context, value) => {
 	
 	if(isString(command) && command == "attributes"){
@@ -114,7 +176,11 @@ const nodeAttributes = async (command, context, value) => {
 }	
 
 
-
+/**
+ * @exports module - instance with {@link Scrapper} to get info from DOM
+ * @property {function} register - add {@link Scrapper} to module
+ * @property {Object[]} rules - rules for {@link Scrapper} for this rule in format name:function
+*/
 module.exports = {
 	
 	register: scraper => {
@@ -122,24 +188,44 @@ module.exports = {
 	},
 
 	rules:[
+		/**
+		 * rule to access cheerio module
+		 * @memberof rules
+		*/
 		{
 			name: ["cheerio"],
 			_execute: engineCheerio
 		},
+		/**
+		 * rule to load info from DOM
+		 * @memberof rules
+		*/
 		{
 			name: ["load","html->page","html->$","transform.html->page","transform.html->$",
 					"cheerio.load","cheerio.html->page","cheerio.html->$",
 					"cheerio.transform.html->page","cheerio.transform.html->$"],
 			_execute: load
 		},
+		/**
+		 * rule to load specific info from DOM
+		 * @memberof rules
+		*/
 		{
 			name: ["once", "cheerio.once", "$.once"],
 			_execute: once
 		},
+		/**
+		 * rule to load all info from DOM
+		 * @memberof rules
+		*/
 		{
 			name: ["all", "cheerio.all", "$.all"],
 			_execute: all
 		},
+		/**
+		 * rule to select DOM node text
+		 * @memberof rules
+		*/
 		{
 			name:[
 				"text",
@@ -147,7 +233,10 @@ module.exports = {
 			],
 			_execute: nodeText
 		},
-
+		/**
+		 * rule to select HTML node outer text
+		 * @memberof rules
+		*/
 		{
 			name:[
 				"html",
@@ -155,7 +244,10 @@ module.exports = {
 			],
 			_execute: nodeHtml
 		},
-
+		/**
+		 * rule to select DOM node classes
+		 * @memberof rules
+		*/
 		{
 			name:[
 				"class","classes",
@@ -163,7 +255,10 @@ module.exports = {
 			],
 			_execute: nodeClasses
 		},
-
+		/**
+		 * rule to select DOM node attributes
+		 * @memberof rules
+		*/
 		{
 			name:[
 				"attributes",

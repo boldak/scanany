@@ -1,0 +1,11 @@
+- use: 
+    - file-plugin
+    - xlsx-plugin 
+
+- file:
+    path: ./jest/server/web/test.xlsx
+    transform: xlsx->js
+    into: result    
+
+- return: result                   
+

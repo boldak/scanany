@@ -1,0 +1,12 @@
+- use: xlsx-plugin 
+
+- xlsx:
+    path: ./jest/server/web/test.xlsx
+    into: data
+
+- map:
+    $ref: data
+    transform: json.stringify
+    into: result    
+
+- return: result                   

@@ -1,0 +1,16 @@
+- use: 
+    - axios-plugin
+    - pdf-plugin 
+
+- fetch:
+    request:
+      method: GET
+      headers: 
+        accept: application/pdf
+      responseType: arraybuffer  
+      url: http://localhost:9999/test.pdf
+    transform:
+      apply:
+        - project: data
+        - pdf->js   
+    into: result

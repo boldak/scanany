@@ -1,0 +1,7 @@
+- use: docx-plugin 
+
+- docx:
+    path: ./jest/server/web/test.docx
+    into: data
+
+- return: data                   
