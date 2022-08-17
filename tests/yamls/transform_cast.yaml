@@ -1,0 +1,13 @@
+
+- map:
+    $const: 
+      prop: a
+
+    transform: 
+      apply:
+        - json.stringify
+        - json.parse
+    into: data
+
+          
+- return: data
