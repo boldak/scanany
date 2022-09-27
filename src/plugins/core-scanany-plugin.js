@@ -208,12 +208,13 @@ module.exports = {
 						context[command["indexed-by"]] = j
 						value = await scraperInstance.executeOnce(command.apply[i], context)
 					}
-					value = deepExtend({}, value)
+					// value = deepExtend({}, value)
 					mapped.push(value)
 					delete context.$item
 					delete context.$index
 				}
 				if(command.into){
+					mapped = mapped.map(d => d)
 					context = await scraperInstance.executeOnce({into:command.into}, context, mapped)
 				}
 				
