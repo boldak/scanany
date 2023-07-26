@@ -23,6 +23,7 @@ const pluginsNames = {
 	"mysql-plugin"			: "./plugins/mysql-scanany-plugin",
 	"transform-plugin"	: "./plugins/transform-scanany-plugin",
 	"rss-plugin"				: "./plugins/rss-scanany-plugin",
+	"webportal-news-plugin": "./plugins/webportal-news-plugin",
 	"puppeteer-plugin"	: "./plugins/puppeteer-scanany-plugin",
 	"axios-plugin"			: "./plugins/axios-scanany-plugin",
 	"core-plugin"				: "./plugins/core-scanany-plugin",
