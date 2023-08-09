@@ -75,6 +75,7 @@ const startParsing = async(command, context) => {
     let link;
     let m;
     let textElements;
+
     try {
         console.log("awaiting driver url")
         await page.goto(task.url);
@@ -95,13 +96,14 @@ const startParsing = async(command, context) => {
                     links: [],
                     images: [],
                 }
-                m.href = link
-                m.raw.html = await page.content()
                 textElements = await selectElements(page, task.text_selector,  task.text_selector_type, task.text_selector_attr, task.text_selector_must_contain)
+                m.href = link
                 // for (let i = 0; i < textElements.length; i++) {
                 //     m.text += textElements[i] + "\n"
                 // }
                 m.text = textElements.join("\n")
+                m.raw.text = m.text
+
                 try {
                     m.links = await selectElements(page, task.links_selector, task.links_selector_type, task.links_selector_attr, task.links_selector_must_contain)
                 }catch (e) {
@@ -113,7 +115,7 @@ const startParsing = async(command, context) => {
                     if (!(task.published_selector === ''))
                         m.publishedAt = await selectElement(page, task.published_selector, task.published_selector_type, task.published_selector_attr, task.published_selector_must_contain)
                 } catch (e) {
-                    console.log(e)
+                    //console.log(e)
                     console.log("Errors while getting m.PublishedAT")
                 }
 
@@ -130,7 +132,7 @@ const startParsing = async(command, context) => {
                     continue
 
                 m.md5 = md5(m.text)
-                res.push(m)
+                res.push({scraper: {message: m}})
             } catch (e) {
                 console.log(e)
                 console.log("Failed to get link", link)
