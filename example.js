@@ -25,9 +25,6 @@ const test = async () => {
 	console.log(result)
 	console.log("---------------------------------------------------------------")
 	
-	const resultJSON = JSON.stringify(result)
-	require("fs").writeFileSync('/home/alex_chornyi/Test/scanany/tests/standarts/jhg', resultJSON)
-	
 	// process.exit(0)
 }
 

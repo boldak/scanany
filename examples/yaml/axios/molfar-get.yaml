@@ -1,0 +1,16 @@
+# how to use axios-plugin
+
+# HTTP request with axios
+
+- use: '@molfar/axios-scanany-plugin' 
+
+- axios:
+    apply:
+      - fetch:
+          request:
+            method: GET
+            url: https://news.ycombinator.com/news
+          transform:
+            project: data  
+          into: data  
+- return: data

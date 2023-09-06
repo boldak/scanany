@@ -1,0 +1,19 @@
+# how to use axios-plugin
+
+# HTTP request with axios
+
+- use: 
+    - url: 'https://raw.githubusercontent.com/wdc-molfar/axios-scanany-plugin/master/index.js'
+      as: external-axios-plugin
+      noCache: true 
+
+- axios:
+    apply:
+      - fetch:
+          request:
+            method: GET
+            url: https://news.ycombinator.com/news
+          transform:
+            project: data  
+          into: data  
+- return: data
