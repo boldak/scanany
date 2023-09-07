@@ -75,10 +75,11 @@ const Scraper = class {
 
 					if (plugin.noCache || !fse.pathExistsSync(`./plugin-cache/${plugin.as}.js`)) {
 						let response = await axios.get(plugin.url)
-						fs.writeFileSync(path.resolve(`./plugin-cache/${plugin.as}.js`), response.data)
+						let filename = path.resolve(__dirname+`/../plugin-cache/${plugin.as}.js`)
+						fs.writeFileSync(path.resolve(filename), response.data)
 					}
 					
-					plugin = `../plugin-cache/${plugin.as}.js`
+					plugin = path.resolve(__dirname+`/../plugin-cache/${plugin.as}.js`)
 				}
 
 				plugin = resolvePluginPath(plugin)
