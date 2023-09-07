@@ -78,7 +78,7 @@ const Scraper = class {
 						fs.writeFileSync(path.resolve(`./plugin-cache/${plugin.as}.js`), response.data)
 					}
 					
-					plugin = `../plugin-cache/${plugin.as}.js`
+					plugin = path.resolve(`./plugin-cache/${plugin.as}.js`)
 				}
 
 				plugin = resolvePluginPath(plugin)
